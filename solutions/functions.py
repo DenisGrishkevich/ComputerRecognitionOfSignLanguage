@@ -1,8 +1,11 @@
 import numpy as np
 from datasets.data_sign import *
 
+# We create an array in which each letter of the alphabet will be assigned its own ordinal number. We do this to facilitate the subsequent interpretation of the results.
 alfabet = { 0:"a", 1:"b", 2:"c", 3:"d", 4:"e", 5:"f", 6:"g", 7:"h", 8:"i", 9:"j", 10:"k", 11:"l", 12:"m", 13:"n", 14:"o", 15:"p", 16:"q", 17:"r", 18:"s", 19:"t", 20:"u", 21:"v", 22:"w", 23:"x", 24:"y", 25:"z"}
 
+# This function allows you to compare two gestures with each other in order to determine the distance of the points of both gestures from each other in space. 
+# If the distance is minimal, then the gestures are similar.
 def distance_calc(p_list):
     sum_all = []
     p_list_all = scal_all(p_list)
@@ -14,6 +17,8 @@ def distance_calc(p_list):
     minimum_sum = min(range(len(sum_all)), key=sum_all.__getitem__)
     return alfabet[minimum_sum]
 
+# Function for scaling gestures. 
+# Immovable points on the palm are taken as a basis, thanks to which it is possible to level the size or distance of the palm from the given palm in the base.
 def scaling(sign, p_list):
     dxw = np.abs(sign[5][0] - sign[17][0])
     dyw = np.abs(sign[5][1] + sign[17][1])/2
@@ -23,19 +28,22 @@ def scaling(sign, p_list):
         p_list[i][0] * (dxw/dxb)
         p_list[i][1] * (dyw/dyb)
     return p_list
-        
+
+# A function that applies scaling to all gestures.
 def scal_all(p_list):
     zip_p_list = []
     for i in range(0, 26):
         zip_p_list.append(scaling(zip_all[i], p_list))
     return zip_p_list
 
+# Test function.
 def check_correct(answer, answer_list, expected):
     if answer == expected:
         answer_list.append(100)
     else:
         answer_list.append(0)
-        
+
+# Improved algorithm for detecting gesture based on removing points and checking key points.        
 def distance_calc_with(p_list):
     sum_all = []
     p_list_all = scal_all(p_list)
@@ -98,6 +106,7 @@ def distance_calc_with(p_list):
             
     return answer
 
+# Saving data.
 def saving_data_sign(p_list, number):
     if number < 100:
         np.save(f"datasets/neuro/sign_c/{number}.npy", p_list)
