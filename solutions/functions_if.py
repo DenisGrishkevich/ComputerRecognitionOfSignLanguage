@@ -1,5 +1,5 @@
-#To simplify the work, create for the array with coordinates x and y. 
-#We also introduce variables that determine the maximum and minimum coordinates on each of the axes.
+#To simplify the work, create for the array with coordinates x and y
+#We also introduce variables that determine the maximum and minimum coordinates on each of the axes
 def sign_if(p_list):
     p_list_x = []
     p_list_y = []
