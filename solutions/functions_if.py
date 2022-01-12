@@ -1,11 +1,11 @@
-#To simplify the work, create for the array with coordinates x and y
+# To simplify the work, create for the array with coordinates x and y
 def sign_if(p_list):
     p_list_x = []
     p_list_y = []
     for i in range(0, 21):
         p_list_x.append(p_list[i][0])
         p_list_y.append(p_list[i][1])
-    #We also introduce variables that determine the maximum and minimum coordinates on each of the axes
+    # We also introduce variables that determine the maximum and minimum coordinates on each of the axes
     max_x = max(p_list_x)
     max_y = max(p_list_y)
     min_x = min(p_list_x)
